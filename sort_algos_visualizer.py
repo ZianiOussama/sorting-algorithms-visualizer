@@ -21,6 +21,16 @@ class MyWidget(Widget):
     def new_array(self):
         self.array = [randint(5, Window.height - 100) for _ in range(self.array_len)]
         self.draw()  # draws the array
+        
+    def draw(self, *args):
+        width = Window.width
+        self.canvas.clear()
+
+        with self.canvas:
+            pos = 0
+            for i in range(len(self.array)):
+                Rectangle(pos=(pos, 100), size=(width / len(self.array) - 2, self.array[i]))
+                pos += width / len(self.array)
 
     def clock(self):
         Clock.schedule_interval(self.draw, 0)
@@ -31,16 +41,6 @@ class MyWidget(Widget):
 
         t1.start()
         t2.start()
-
-    def draw(self, *args):
-        width = Window.width
-        self.canvas.clear()
-
-        with self.canvas:
-            pos = 0
-            for i in range(len(self.array)):
-                Rectangle(pos=(pos, 100), size=(width / len(self.array) - 2, self.array[i]))
-                pos += width / len(self.array)
 
     def bubble_sort(self):
         for j in range(len(self.array)):
@@ -113,10 +113,8 @@ class MyWidget(Widget):
             time.sleep(1/self.speed)
 
         l, r = array[:piv], array[piv:]
-
         self.quick_sort(l)
         self.quick_sort(r)
-
         array[:piv], array[piv:] = l, r
 
     def radix_sort(self):
