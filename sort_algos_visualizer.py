@@ -25,7 +25,6 @@ class MyWidget(Widget):
     def draw(self, *args):
         width = Window.width
         self.canvas.clear()
-
         with self.canvas:
             pos = 0
             for i in range(len(self.array)):
@@ -38,7 +37,6 @@ class MyWidget(Widget):
     def start_threading(self, func):
         t1 = threading.Thread(target=func)
         t2 = threading.Thread(target=self.clock)
-
         t1.start()
         t2.start()
 
